@@ -30,16 +30,15 @@
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-var margin = {top: 50, right: 20, bottom: 30, left: 40},
+var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
-    height = 1500 - margin.top - margin.bottom;
+    height = 500 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
 
 var y = d3.scale.linear()
-    .domain([0,200])
-    .range([0,10]);
+    .range([height, 0]);
 
 var xAxis = d3.svg.axis()
     .scale(x)
@@ -48,7 +47,7 @@ var xAxis = d3.svg.axis()
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left");
-    //.ticks(10);
+    //.ticks();
 
 var arr = [];
 
@@ -70,8 +69,7 @@ d3.csv("CoinToss.csv", function(error, data) {
   });
 
   x.domain(arr.map(function(d) { return d.number; }));
-  y.domain(arr.map(function(d) { return d.fakeMean; }));
-
+  y.domain([d3.min(arr, function(d) { return d.fakeMean; })-5, d3.max(arr, function(d) { return d.fakeMean; })+5]);
 
   svg.append("g")
       .attr("class", "x axis")

@@ -62,11 +62,30 @@ d3.csv("CoinToss.csv", function(error, data) {
 
   data.forEach(function(d, i){
     var temp = 0;
+    var numInRow = 0;
+    var temp2 = 0;
     for(n=0; n<199; n++){
+      if(Number(d.Person[n]) === Number(d.Person[n+1]))
+      {
+        console.log("hej")
+        temp2 += 1;
+        if(temp2 > 5)
+        {
+          numInRow += 1;
+          temp2 = 0;
+        }
+      }
+      else
+      {
+        temp2 = 0;
+      }
+
       temp += Number(d.Person[n]);
     }
-    arr.push({number: i, fakeMean: temp});
+    arr.push({number: i, fakeMean: temp, inRow: numInRow});
   });
+
+  console.log(arr)
 
   x.domain(arr.map(function(d) { return d.number; }));
   y.domain([d3.min(arr, function(d) { return d.fakeMean; })-5, d3.max(arr, function(d) { return d.fakeMean; })+5]);

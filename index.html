@@ -55,7 +55,7 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.tsv("data.tsv", type, function(error, data) {
+d3.csv("CoinToss.csv", type, function(error, data) {
   if (error) throw error;
 
   x.domain(data.map(function(d) { return d.letter; }));
@@ -64,7 +64,12 @@ d3.tsv("data.tsv", type, function(error, data) {
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+      .call(xAxis)
+    .append("text")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Person");
 
   svg.append("g")
       .attr("class", "y axis")
@@ -74,7 +79,7 @@ d3.tsv("data.tsv", type, function(error, data) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Frequency");
+      .text("Number of ones");
 
   svg.selectAll(".bar")
       .data(data)

@@ -30,15 +30,16 @@
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
+var margin = {top: 50, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    height = 1500 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
 
 var y = d3.scale.linear()
-    .range([height, 0]);
+    .domain([0,200])
+    .range([0,10]);
 
 var xAxis = d3.svg.axis()
     .scale(x)
@@ -46,8 +47,10 @@ var xAxis = d3.svg.axis()
 
 var yAxis = d3.svg.axis()
     .scale(y)
-    .orient("left")
-    .ticks(10, "%");
+    .orient("left");
+    //.ticks(10);
+
+var arr = [];
 
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -55,11 +58,20 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("CoinToss.csv", type, function(error, data) {
+d3.csv("CoinToss.csv", function(error, data) {
   if (error) throw error;
 
-  x.domain(data.map(function(d) { return d.letter; }));
-  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+  data.forEach(function(d, i){
+    var temp = 0;
+    for(n=0; n<199; n++){
+      temp += Number(d.Person[n]);
+    }
+    arr.push({number: i, fakeMean: temp});
+  });
+
+  x.domain(arr.map(function(d) { return d.number; }));
+  y.domain(arr.map(function(d) { return d.fakeMean; }));
+
 
   svg.append("g")
       .attr("class", "x axis")
@@ -75,25 +87,21 @@ d3.csv("CoinToss.csv", type, function(error, data) {
       .attr("class", "y axis")
       .call(yAxis)
     .append("text")
-      .attr("transform", "rotate(-90)")
+      .attr("transform", "rotate(90)")
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
       .text("Number of ones");
 
   svg.selectAll(".bar")
-      .data(data)
-    .enter().append("rect")
+      .data(arr)
+      .enter()
+    .append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.letter); })
+      .attr("x", function(d) {return x(d.number); })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.frequency); })
-      .attr("height", function(d) { return height - y(d.frequency); });
+      .attr("y", function(d) { return y(d.fakeMean); })
+      .attr("height", function(d) { return height - y(d.fakeMean); });
 });
-
-function type(d) {
-  d.frequency = +d.frequency;
-  return d;
-}
 
 </script>

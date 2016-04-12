@@ -30,7 +30,7 @@
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script>
 
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
+var margin = {top: 100, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -63,13 +63,13 @@ d3.csv("CoinToss.csv", function(error, data) {
   data.forEach(function(d, i){
     var temp = 0;
     var numInRow = 0;
-    var temp2 = 0;
+    var temp2 = 1;
+    
     for(n=0; n<199; n++){
       if(Number(d.Person[n]) === Number(d.Person[n+1]))
       {
-        console.log("hej")
         temp2 += 1;
-        if(temp2 > 5)
+        if(temp2 >= 5)
         {
           numInRow += 1;
           temp2 = 0;
@@ -88,7 +88,7 @@ d3.csv("CoinToss.csv", function(error, data) {
   console.log(arr)
 
   x.domain(arr.map(function(d) { return d.number; }));
-  y.domain([d3.min(arr, function(d) { return d.fakeMean; })-5, d3.max(arr, function(d) { return d.fakeMean; })+5]);
+  y.domain([d3.min(arr, function(d) { return d.inRow; }), d3.max(arr, function(d) { return d.inRow; })+1]);
 
   svg.append("g")
       .attr("class", "x axis")
@@ -117,8 +117,8 @@ d3.csv("CoinToss.csv", function(error, data) {
       .attr("class", "bar")
       .attr("x", function(d) {return x(d.number); })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.fakeMean); })
-      .attr("height", function(d) { return height - y(d.fakeMean); });
+      .attr("y", function(d) { return y(d.inRow); })
+      .attr("height", function(d) { return height - y(d.inRow); });
 });
 
 </script>

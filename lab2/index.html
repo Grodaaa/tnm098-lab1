@@ -25,6 +25,7 @@ body {
 
 <body>
     <div id="slider5"></div>
+    <h2>Value på slidern: <span id="slider4text">0</span></h2>
 <script src="//d3js.org/d3.v3.min.js"></script>
 <script src="d3.slider.js"></script>
 <script>
@@ -117,6 +118,7 @@ d3.tsv("EyeTrack-raw.tsv", function(error, data) {
         .attr("cy", function(d) { return y(d["GazePointY(px)"]); });
       }})
       .style("fill", "red");
+      d3.select('#slider4text').text(value);
 
   }));
 

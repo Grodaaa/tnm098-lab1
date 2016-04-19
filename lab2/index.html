@@ -40,7 +40,7 @@ var y = d3.scale.linear()
     .range([height, 0]);
 
 var radius = d3.scale.linear()
-    .range([3, 6]);
+    .range([3, 10]);
 
 var time = d3.scale.linear();
 
@@ -97,19 +97,26 @@ d3.tsv("EyeTrack-raw.tsv", function(error, data) {
 
   d3.select('#slider5').call(d3.slider().axis(true).min(1).max(744).step(1).on("slide", function(evt, value){ 
 
-  console.log(value);
-
-  svg.selectAll(".dot")
-      .data(data)
-      .enter().append("circle")
-      .each(function(d,i) {if(i===value) {
-        d3.select(this).attr("class", "dot")
+    svg.selectAll(".dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("class", "dot")
         .attr("r", function(d) { return radius(d["GazeEventDuration(mS)"]); }) //Radien
         .attr("cx", function(d) { return x(d["GazePointX(px)"]); })
         .attr("cy", function(d) { return y(d["GazePointY(px)"]); });
-      }});
-      
-      //.style("fill", function(d) { return color(d["GazeEventDuration(mS)"]); });
+
+    d3.select(".dit").remove();
+
+    svg.selectAll(".dit")
+      .data(data)
+      .enter().append("circle")
+      .each(function(d,i) {if(i===value) {
+        d3.select(this).attr("class", "dit")
+        .attr("r", function(d) { return radius(d["GazeEventDuration(mS)"]); }) //Radien
+        .attr("cx", function(d) { return x(d["GazePointX(px)"]); })
+        .attr("cy", function(d) { return y(d["GazePointY(px)"]); });
+      }})
+      .style("fill", "red");
 
   }));
 
@@ -132,11 +139,7 @@ d3.tsv("EyeTrack-raw.tsv", function(error, data) {
       .style("text-anchor", "end")
       .text(function(d) { return d; });
 
-  
-
-});
-
-    
+});  
 
 </script>
 </body>

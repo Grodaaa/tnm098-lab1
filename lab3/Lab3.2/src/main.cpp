@@ -7,10 +7,77 @@
 //  Implements a Linked List class.
 //**************************************************************
 
+#include <iostream>
+#include <fstream>
+#include <string>
 #include "HashTable.h"
+
+using namespace std;
 
 int main()
 {
+    //Read a file
+    string sentence;
+
+    ifstream is("example.txt");    // open file
+    
+    ofstream outfile;
+    outfile.open("example_out.txt");
+
+    char c;
+    while (is.get(c))                   // loop getting single characters
+    {                   
+        if(c == '.' || c == '!' || c == '?')
+        {
+            cout << "Punkt!";
+            outfile << sentence << endl;
+            sentence.clear();
+        }
+        else
+        {
+            sentence += c;
+        }
+    }         
+    
+    //cout << c;
+    cout << sentence;
+
+    is.close(); 
+    outfile.close();  
+
+    /*string line;
+    ifstream myfile ("example.txt");
+    
+    ofstream outfile;
+    outfile.open("example_out.txt");
+
+    if (myfile.is_open())
+    {
+        while ( getline (myfile, line, '.'))
+        {
+            //Do stuff
+            //To lower case
+            transform(line.begin(), line.end(), line.begin(), ::tolower);
+
+            //Every line is a sentence
+
+            //Remove punctuations
+
+            //Convert to hash dictionary
+
+            //Write to text file
+            outfile << line << endl;
+
+            cout << line << '\n';
+        }
+        myfile.close();
+    }
+
+    else cout << "Unable to open file"; */
+
+
+/*
+
     // Create 26 Items to store in the Hash Table.
     Item * A = new Item {"Apple", NULL};
     Item * B = new Item {"Banana", NULL};
@@ -84,6 +151,6 @@ int main()
     
     // Look up an item in the hash table
     Item * result = table.getItemByKey("Snakes");
-    cout << result -> key << endl;
+    cout << result -> key << endl;*/
     return 0;
 }

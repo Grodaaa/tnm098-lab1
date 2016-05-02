@@ -74,6 +74,6 @@ end
 
 %%
 D = sortrows(delta, 5);
-
+bar(delta(:,5))
 
 

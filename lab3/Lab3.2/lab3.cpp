@@ -1,4 +1,7 @@
 #include <iostream>
+#include <fstream>
+#include <algorithm>
+#include <string>
 using namespace std;
 
 class LinkedList{
@@ -49,12 +52,45 @@ int main() {
     list.addValue(10);
     list.addValue(20);
 
+    /*cout << list.popValue() << endl;
     cout << list.popValue() << endl;
-    cout << list.popValue() << endl;
-    cout << list.popValue() << endl;
+    cout << list.popValue() << endl;*/
     // because there is no error checking in popValue(), the following
     // is undefined behavior. Probably the program will crash, because
     // there are no more values in the list.
     // cout << list.popValue() << endl;
+
+
+    //Read a file
+	string line;
+	ifstream myfile ("example.txt");
+	
+	ofstream outfile;
+   	outfile.open("example_out.txt");
+
+	if (myfile.is_open())
+	{
+		while ( getline (myfile,line) )
+		{
+			//Do stuff
+			//To lower case
+			transform(line.begin(), line.end(), line.begin(), ::tolower);
+
+			//Every line is a sentence
+
+			//Remove punctuations
+
+			//Convert to hash dictionary
+
+			//Write to text file
+			outfile << line << endl;
+
+		  	cout << line << '\n';
+		}
+		myfile.close();
+	}
+
+	else cout << "Unable to open file"; 
+
     return 0;
 }

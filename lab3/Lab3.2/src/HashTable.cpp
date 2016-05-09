@@ -54,7 +54,7 @@ Item * HashTable::getItemByKey( string itemKey )
 // Display the contents of the Hash Table to console window.
 void HashTable::printTable()
 {
-    cout << "\n\nHash Table:\n";
+    cout << "\nHash Table:\n";
     for ( int i = 0; i < length; i++ )
     {
         cout << i + 1 << ": ";

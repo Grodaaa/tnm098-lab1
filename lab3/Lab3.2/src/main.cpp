@@ -28,9 +28,8 @@ int main()
     Item * E = new Item {"Tomaterna", NULL};
     Item * F = new Item {"Apelsiner", NULL};
 
-    
     // Create a Hash Table of 13 Linked List elements.
-    HashTable table;
+    
     
     // Add 3 Items to Hash Table.
     table.insertItem(A, table.getNumberOfItems());

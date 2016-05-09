@@ -19,68 +19,54 @@ int main()
     //Read a file
     string sentence;
 
-    ifstream is("text/01.txt");    // open file
-    
-    ofstream outfile;
-    outfile.open("example_out.txt");
-
-    char c;
-    while (is.get(c))                   // loop getting single characters
-    {                   
-        if(ispunct(c))
+    for(int i = 1; i <= 10; i++)
+    {
+        string inTemp;
+        if(i < 10)
         {
-        	if(c == '.' || c == '!' || c == '?')
-        	{
-        		outfile << sentence << endl;
-            	sentence.clear();
-        	}            
-        }
-        else if(c == '\n')
-        {
-        	sentence += ' ';
+            inTemp = "text/0" + to_string(i) + ".txt";
         }
         else
         {
-            sentence += c;
+            inTemp = "text/" + to_string(i) + ".txt";
         }
-    }         
-    
-    //cout << c;
-    cout << sentence;
+        ifstream is(inTemp);
 
-    is.close(); 
-    outfile.close();  
+        string outTemp;
+        outTemp = "out/out" + to_string(i) + ".txt";
+        ofstream outfile;
+        outfile.open(outTemp);
 
-    /*string line;
-    ifstream myfile ("example.txt");
-    
-    ofstream outfile;
-    outfile.open("example_out.txt");
+        char c;
+        while (is.get(c))                   // loop getting single characters
+        {                   
+            if(ispunct(c))
+            {
+                if(c == '.' || c == '!' || c == '?')
+                {
+                    outfile << sentence << endl;
+                    sentence.clear();
+                }            
+            }
+            else if(c == '\n')
+            {
+                sentence += ' ';
+            }
+            else
+            {
+                sentence += tolower(c);
+            }
+        }         
+        
+        //cout << c;
+        cout << sentence;
 
-    if (myfile.is_open())
-    {
-        while ( getline (myfile, line, '.'))
-        {
-            //Do stuff
-            //To lower case
-            transform(line.begin(), line.end(), line.begin(), ::tolower);
-
-            //Every line is a sentence
-
-            //Remove punctuations
-
-            //Convert to hash dictionary
-
-            //Write to text file
-            outfile << line << endl;
-
-            cout << line << '\n';
-        }
-        myfile.close();
+        is.close(); 
+        outfile.close();  
+            
     }
-
-    else cout << "Unable to open file"; */
-
+    
+   
 
 /*
 

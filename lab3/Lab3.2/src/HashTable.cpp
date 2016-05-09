@@ -14,7 +14,8 @@
 // Array length is set to 13 by default.
 HashTable::HashTable( int tableLength )
 {
-    if (tableLength <= 0) tableLength = 13;
+    //if (tableLength <= 0) tableLength = 10;
+    tableLength = 30;
     array = new LinkedList[ tableLength ];
     length = tableLength;
 }

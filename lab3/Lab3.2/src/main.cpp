@@ -19,7 +19,7 @@ void insertHash();
 
 int main()
 {
-    convert();
+    //convert();
     insertHash();
     /*Det vi vill göra:
     Läsa in filer och ta bort punkter + göra om till små bokstäver - CHECK!
@@ -85,13 +85,38 @@ void convert()
 
 void insertHash()
 {
+    HashTable table;
+    string word;
+    ifstream is;
+    is.open("example.txt");
+
+    if(!is)
+    {
+        cout << "Could not open file";
+    }
+
+    while (is >> word)                   // loop getting single characters
+    {                  
+        Item * temp = new Item {word, NULL};
+        if(!table.getItemByKey(word))
+        {
+            table.insertItem(temp, table.getNumberOfItems());
+        }
+        else
+        {
+            cout << word << " finns redan!!" << endl;
+        }
+            
+    }        
+    is.close(); 
+
     // Create 26 Items to store in the Hash Table.
-    Item * A = new Item {"Apple", NULL};
+    /*Item * A = new Item {"Apple", NULL};
     Item * B = new Item {"Banana", NULL};
     Item * C = new Item {"Citron", NULL};
 
     // Create a Hash Table of 13 Linked List elements.
-    HashTable table;
+    
     
     // Add 3 Items to Hash Table.
     table.insertItem(A, table.getNumberOfItems());
@@ -107,6 +132,6 @@ void insertHash()
     //table.removeItem("Apple");
     
     // Look up an item in the hash table
-    //Item * result = table.getItemByKey("Snakes");
+    //Item * result = table.getItemByKey("lite");
     //cout << result -> key << endl;
 }

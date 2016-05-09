@@ -1,5 +1,9 @@
-Writing this to a file. And some more text! To see if
-the program works? Let’s see..
+writing this to a file
+and some more text
+to see if the program works
+lets see
 
-Annu en mening att kolla? ”Och lite citat.” - - Lite streck.
+annu en mening att kolla
+och lite citat
+lite streck
   

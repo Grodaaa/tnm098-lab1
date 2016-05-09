@@ -10,7 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "HashTable.h"
+#include "HashMap.cpp"
 
 using namespace std;
 
@@ -19,7 +19,9 @@ void convert();
 int main()
 {
     convert();
-        // Create 26 Items to store in the Hash Table.
+    
+    HashMap hash;
+     /*   // Create 26 Items to store in the Hash Table.
     Item * A = new Item {"Apple", NULL};
     Item * B = new Item {"Banana", NULL};
     Item * C = new Item {"Caterpillar", NULL};
@@ -92,7 +94,7 @@ int main()
     
     // Look up an item in the hash table
     Item * result = table.getItemByKey("Snakes");
-    cout << result -> key << endl;
+    cout << result -> key << endl;*/
     return 0;
 }
 

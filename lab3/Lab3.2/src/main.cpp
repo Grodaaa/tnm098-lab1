@@ -19,7 +19,7 @@ int main()
     //Read a file
     string sentence;
 
-    ifstream is("example.txt");    // open file
+    ifstream is("text/01.txt");    // open file
     
     ofstream outfile;
     outfile.open("example_out.txt");
@@ -27,11 +27,17 @@ int main()
     char c;
     while (is.get(c))                   // loop getting single characters
     {                   
-        if(c == '.' || c == '!' || c == '?')
+        if(ispunct(c))
         {
-            cout << "Punkt!";
-            outfile << sentence << endl;
-            sentence.clear();
+        	if(c == '.' || c == '!' || c == '?')
+        	{
+        		outfile << sentence << endl;
+            	sentence.clear();
+        	}            
+        }
+        else if(c == '\n')
+        {
+        	sentence += ' ';
         }
         else
         {

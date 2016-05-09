@@ -29,9 +29,9 @@ int HashTable::hash( string itemKey )
 }
 
 // Adds an item to the Hash Table.
-void HashTable::insertItem( Item * newItem )
+void HashTable::insertItem( Item * newItem, int len )
 {
-    int index = hash( newItem -> key );
+    int index = len; //hash( newItem -> key );
     array[ index ].insertItem( newItem );
 }
 
@@ -57,7 +57,7 @@ void HashTable::printTable()
     cout << "\n\nHash Table:\n";
     for ( int i = 0; i < length; i++ )
     {
-        cout << "Bucket " << i + 1 << ": ";
+        cout << i + 1 << ": ";
         array[i].printList();
     }
 }

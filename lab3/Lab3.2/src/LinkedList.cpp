@@ -84,12 +84,11 @@ void LinkedList::printList()
 {
     if (length == 0)
     {
-        cout << "\n{ }\n";
+        cout << "\n";
         return;
     }
     Item * p = head;
     Item * q = head;
-    cout << "\n{ ";
     while (q)
     {
         p = q;
@@ -101,7 +100,7 @@ void LinkedList::printList()
         }
         q = p -> next;
     }
-    cout << "}\n";
+    cout << "\n";
 }
 
 // Returns the length of the list.

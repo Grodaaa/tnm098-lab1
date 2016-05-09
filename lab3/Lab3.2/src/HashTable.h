@@ -36,7 +36,7 @@ public:
     HashTable( int tableLength = 13 );
     
     // Adds an item to the Hash Table.
-    void insertItem( Item * newItem );
+    void insertItem( Item * newItem, int len );
     
     // Deletes an Item by key from the Hash Table.
     // Returns true if the operation is successful.

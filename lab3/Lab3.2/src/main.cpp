@@ -24,12 +24,12 @@ int main()
     Item * A = new Item {"Apple", NULL};
     Item * B = new Item {"Banana", NULL};
     Item * C = new Item {"Citron", NULL};
-    Item * D = new Item {"Hejsan", NULL};
-    Item * E = new Item {"Tomaterna", NULL};
-    Item * F = new Item {"Apelsiner", NULL};
+    //Item * D = new Item {"Hejsan", NULL};
+    //Item * E = new Item {"Tomaterna", NULL};
+    //Item * F = new Item {"Apelsiner", NULL};
 
     // Create a Hash Table of 13 Linked List elements.
-    
+    HashTable table;
     
     // Add 3 Items to Hash Table.
     table.insertItem(A, table.getNumberOfItems());

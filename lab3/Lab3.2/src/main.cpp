@@ -10,7 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "HashMap.cpp"
+#include "HashTable.h"
 
 using namespace std;
 
@@ -20,9 +20,13 @@ int main()
 {
     convert();
     
-    HashMap hash;
+    HashTable table;
 
-    hash.put(1, "word");
+    Item * temp = new Item{"test", NULL};
+    table.insertItem(temp);
+    
+    table.printTable();
+
      /*   // Create 26 Items to store in the Hash Table.
     Item * A = new Item {"Apple", NULL};
     Item * B = new Item {"Banana", NULL};
@@ -52,7 +56,7 @@ int main()
     Item * Z = new Item {"Zest of Lemon", NULL};
     
     // Create a Hash Table of 13 Linked List elements.
-    HashTable table;
+    
     
     // Add 3 Items to Hash Table.
     table.insertItem(A);

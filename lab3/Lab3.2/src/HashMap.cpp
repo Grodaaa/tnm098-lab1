@@ -1,5 +1,8 @@
 #include <iostream>
+#include <string>
 #include "HashEntry.cpp"
+
+using namespace std;
 
 const int TABLE_SIZE = 128;
  
@@ -13,17 +16,17 @@ public:
                   table[i] = NULL;
       }
  
-      int get(int key) {
+      string get(int key) {
             int hash = (key % TABLE_SIZE);
             while (table[hash] != NULL && table[hash]->getKey() != key)
                   hash = (hash + 1) % TABLE_SIZE;
             if (table[hash] == NULL)
-                  return -1;
+                  return NULL;
             else
                   return table[hash]->getValue();
       }
  
-      void put(int key, int value) {
+      void put(int key, string value) {
             int hash = (key % TABLE_SIZE);
             while (table[hash] != NULL && table[hash]->getKey() != key)
                   hash = (hash + 1) % TABLE_SIZE;

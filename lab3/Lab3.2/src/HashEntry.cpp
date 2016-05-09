@@ -1,11 +1,14 @@
 #include <iostream>
+#include <string>
+
+using namespace std;
 
 class HashEntry {
 private:
       int key;
-      int value;
+      string value;
 public:
-      HashEntry(int key, int value) {
+      HashEntry(int key, string value) {
             this->key = key;
             this->value = value;
       }
@@ -14,7 +17,7 @@ public:
             return key;
       }
  
-      int getValue() {
+      string getValue() {
             return value;
       }
 };

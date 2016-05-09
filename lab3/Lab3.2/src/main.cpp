@@ -21,6 +21,8 @@ int main()
     convert();
     
     HashMap hash;
+
+    hash.put(1, "word");
      /*   // Create 26 Items to store in the Hash Table.
     Item * A = new Item {"Apple", NULL};
     Item * B = new Item {"Banana", NULL};

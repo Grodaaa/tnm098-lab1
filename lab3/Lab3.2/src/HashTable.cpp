@@ -48,8 +48,17 @@ bool HashTable::removeItem( string itemKey )
 // If the item isn't found, a null pointer is returned.
 Item * HashTable::getItemByKey( string itemKey )
 {
-    int index = hash( itemKey );
-    return array[ index ].getItem( itemKey );
+    for ( int i = 0; i < length; i++ )
+    {
+        if(array[i].getItem(itemKey))
+        {
+            return array[i].getItem(itemKey);
+        }
+    }
+    return NULL;
+
+    /*int index = hash( itemKey );
+    return array[ index ].getItem( itemKey );*/
 }
 
 // Display the contents of the Hash Table to console window.

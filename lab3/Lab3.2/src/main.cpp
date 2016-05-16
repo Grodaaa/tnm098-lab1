@@ -122,7 +122,7 @@ void insertHash()
     table.insertItem(A, table.getNumberOfItems());
     table.insertItem(B, table.getNumberOfItems());
     table.insertItem(C, table.getNumberOfItems());
-    /*table.insertItem(D);
+    table.insertItem(D);
     table.insertItem(E);
     table.insertItem(F);*/
     table.printTable();

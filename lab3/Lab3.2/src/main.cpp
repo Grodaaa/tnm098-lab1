@@ -18,6 +18,8 @@ void convertText();
 void insertHash();
 void convertToNumbers();
 
+HashTable table;
+
 int main()
 {
     //convert();
@@ -88,7 +90,6 @@ void convertText()
 
 void insertHash()
 {
-    HashTable table;
     string word;
     for(int i = 1; i <= 10; i++)
     {
@@ -131,5 +132,36 @@ void insertHash()
 
 void convertToNumbers()
 {
+
+    string word;
+
+    for(int i = 1; i <= 10; i++)
+    {
+        string inTemp;
+        inTemp = "out/out" + to_string(i) + ".txt";
+        ifstream is;
+        is.open(inTemp);
+
+        string outTemp;
+        outTemp = "num/num" + to_string(i) + ".txt";
+        ofstream outfile;
+        outfile.open(outTemp);
+
+        if(!is)
+        {
+            cout << "Could not open file";
+        }
+
+        while (is >> word)                   // loop getting single characters
+        {                  
+            if(table.getIndexByKey(word))
+            {
+                outfile << table.getIndexByKey(word) << endl; 
+            }
+        } 
+
+        is.close();
+        outfile.close();
+    }
 
 }

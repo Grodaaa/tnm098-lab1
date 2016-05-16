@@ -61,6 +61,21 @@ Item * HashTable::getItemByKey( string itemKey )
     return array[ index ].getItem( itemKey );*/
 }
 
+int HashTable::getIndexByKey( string itemKey )
+{
+    for ( int i = 0; i < length; i++ )
+    {
+        if(array[i].getItem(itemKey))
+        {
+            return i;
+        }
+    }
+    return 1000;
+
+    /*int index = hash( itemKey );
+    return array[ index ].getItem( itemKey );*/
+}
+
 // Display the contents of the Hash Table to console window.
 void HashTable::printTable()
 {

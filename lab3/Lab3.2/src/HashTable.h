@@ -45,6 +45,8 @@ public:
     // Returns an item from the Hash Table by key.
     // If the item isn't found, a null pointer is returned.
     Item * getItemByKey( string itemKey );
+
+    int getIndexByKey( string itemKey );
     
     // Display the contents of the Hash Table to console window.
     void printTable();

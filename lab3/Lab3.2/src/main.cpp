@@ -14,13 +14,16 @@
 
 using namespace std;
 
-void convert();
+void convertText();
 void insertHash();
+void convertToNumbers();
 
 int main()
 {
     //convert();
     insertHash();
+    convertToNumbers();
+
     /*Det vi vill göra:
     Läsa in filer och ta bort punkter + göra om till små bokstäver - CHECK!
     Lägga in ord från filerna i hashtabellen
@@ -31,7 +34,7 @@ int main()
     return 0;
 }
 
-void convert()
+void convertText()
 {
     //Read a file
     string sentence;
@@ -124,4 +127,9 @@ void insertHash()
     //table.printTable();
     //table.printHistogram();
     
+}
+
+void convertToNumbers()
+{
+
 }

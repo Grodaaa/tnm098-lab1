@@ -11,6 +11,8 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <stdio.h>
+#include <string.h>
 #include "HashTable.h"
 
 using namespace std;
@@ -18,6 +20,8 @@ using namespace std;
 void convertText();
 void insertHash();
 void convertToNumbers();
+void compareText();
+bool compareSentences(string lineOne, string lineTwo);
 
 HashTable table;
 
@@ -25,7 +29,8 @@ int main()
 {
     //convert();
     insertHash();
-    convertToNumbers();
+    //convertToNumbers();
+    compareText();
 
     /*Det vi vill göra:
     Läsa in filer och ta bort punkter + göra om till små bokstäver - CHECK!
@@ -103,10 +108,6 @@ void insertHash()
         {
             cout << "Could not open file";
         }
-        else
-        {
-            cout << "File " << i << " is open!";
-        }
 
         while (is >> word)                   // loop getting single characters
         {                  
@@ -122,7 +123,6 @@ void insertHash()
                 
         }        
         is.close();
-        cout << " File closed!" << endl;
         
     }
 
@@ -169,4 +169,84 @@ void convertToNumbers()
         is.close();
         outfile.close();
     }
+}
+
+void compareText()
+{
+    for(int i = 1; i <= 9; i++)
+    {
+        for(int j = 2; j <= 10; j++)
+        {
+            if(i != j)
+            {
+                string fileOne;
+                fileOne = "num/num" + to_string(i) + ".txt";
+                ifstream isOne;
+                isOne.open(fileOne);
+
+                string fileTwo;
+                fileTwo = "num/num" + to_string(j) + ".txt";
+                ifstream isTwo;
+                isTwo.open(fileTwo);
+
+                if(!isOne)
+                {
+                    cout << "Could not open file";
+                }
+
+                if(!isTwo)
+                {
+                    cout << "Could not open file";
+                }
+
+
+                string lineOne, lineTwo;
+                while (getline(isOne, lineOne))
+                {
+                    while (getline(isTwo, lineTwo))
+                    {
+                        if(lineOne.length() == lineTwo.length())
+                        {
+                            //cout << "lika långa" << endl;
+                            if(compareSentences(lineOne, lineTwo))
+                            {
+                                cout << lineOne << endl << lineTwo << endl;
+                                cout << "HITTAD! File " << i << " and file: " << j << endl;
+                            }  
+                            
+                            // if(lineOne.compare(lineTwo))
+                            // {
+                            //     cout << lineOne << endl << lineTwo << endl;
+                            //     cout << "File " << i << " and file: " << j << endl;
+                            // }
+
+                        }   
+                    }
+                }
+
+                isOne.close();
+                isTwo.close();
+
+            } 
+        }
+    }
+}
+
+bool compareSentences(string lineOne, string lineTwo)
+{
+    istringstream bufferOne(lineOne);
+    istringstream bufferTwo(lineTwo);
+
+    string wordOne, wordTwo;
+
+    while (bufferOne >> wordOne)
+    {
+        while(bufferTwo >> wordTwo)
+        {
+            //cout << "Ord1: " << wordOne << " ord2: " << wordTwo << endl;
+            if(wordOne != wordTwo)
+                return false;
+        }
+    }
+    return true;
 }

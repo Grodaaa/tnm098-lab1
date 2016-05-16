@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include "HashTable.h"
 
@@ -126,8 +127,7 @@ void insertHash()
     }
 
     //table.printTable();
-    //table.printHistogram();
-    
+    //table.printHistogram(); 
 }
 
 void convertToNumbers()
@@ -152,16 +152,21 @@ void convertToNumbers()
             cout << "Could not open file";
         }
 
-        while (is >> word)                   // loop getting single characters
-        {                  
-            if(table.getIndexByKey(word))
-            {
-                outfile << table.getIndexByKey(word) << endl; 
-            }
-        } 
+		string line;
+		while (getline(is, line))
+		{
+			// put the line in an istringstream
+			istringstream buffer(line);
+			// read the words from the line
+			string word;
+			while (buffer >> word)
+			{
+	            outfile << table.getIndexByKey(word) << " "; 
+			}
+			outfile << endl;
+		}
 
         is.close();
         outfile.close();
     }
-
 }

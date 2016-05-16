@@ -70,7 +70,7 @@ int HashTable::getIndexByKey( string itemKey )
             return i;
         }
     }
-    return 1000;
+    return 10000;
 
     /*int index = hash( itemKey );
     return array[ index ].getItem( itemKey );*/

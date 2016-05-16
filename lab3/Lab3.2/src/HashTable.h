@@ -33,7 +33,7 @@ public:
     
     // Constructs the empty Hash Table object.
     // Array length is set to 13 by default.
-    HashTable( int tableLength = 30 );
+    HashTable( int tableLength = 1000 );
     
     // Adds an item to the Hash Table.
     void insertItem( Item * newItem, int len );

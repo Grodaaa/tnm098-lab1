@@ -87,51 +87,41 @@ void insertHash()
 {
     HashTable table;
     string word;
-    ifstream is;
-    is.open("example.txt");
-
-    if(!is)
+    for(int i = 1; i <= 10; i++)
     {
-        cout << "Could not open file";
-    }
+        string inTemp;
+        inTemp = "out/out" + to_string(i) + ".txt";
+        ifstream is;
+        is.open(inTemp);
 
-    while (is >> word)                   // loop getting single characters
-    {                  
-        Item * temp = new Item {word, NULL};
-        if(!table.getItemByKey(word))
+        if(!is)
         {
-            table.insertItem(temp, table.getNumberOfItems());
+            cout << "Could not open file";
         }
         else
         {
-            cout << word << " finns redan!!" << endl;
+            cout << "File " << i << " is open!";
         }
-            
-    }        
-    is.close(); 
 
-    // Create 26 Items to store in the Hash Table.
-    /*Item * A = new Item {"Apple", NULL};
-    Item * B = new Item {"Banana", NULL};
-    Item * C = new Item {"Citron", NULL};
+        while (is >> word)                   // loop getting single characters
+        {                  
+            Item * temp = new Item {word, NULL};
+            if(!table.getItemByKey(word))
+            {
+                table.insertItem(temp, table.getNumberOfItems());
+            }
+            else
+            {
+                //cout << word << " finns redan!!" << endl;
+            }
+                
+        }        
+        is.close();
+        cout << " File closed!" << endl;
+        
+    }
 
-    // Create a Hash Table of 13 Linked List elements.
-    
-    
-    // Add 3 Items to Hash Table.
-    table.insertItem(A, table.getNumberOfItems());
-    table.insertItem(B, table.getNumberOfItems());
-    table.insertItem(C, table.getNumberOfItems());
-    table.insertItem(D);
-    table.insertItem(E);
-    table.insertItem(F);*/
-    table.printTable();
+    //table.printTable();
     //table.printHistogram();
     
-    // Remove one item from Hash Table.
-    //table.removeItem("Apple");
-    
-    // Look up an item in the hash table
-    //Item * result = table.getItemByKey("lite");
-    //cout << result -> key << endl;
 }

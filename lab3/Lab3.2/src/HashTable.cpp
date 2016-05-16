@@ -15,7 +15,7 @@
 HashTable::HashTable( int tableLength )
 {
     //if (tableLength <= 0) tableLength = 10;
-    tableLength = 30;
+    tableLength = 4100;
     array = new LinkedList[ tableLength ];
     length = tableLength;
 }

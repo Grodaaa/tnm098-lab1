@@ -47,6 +47,8 @@ public:
     Item * getItemByKey( string itemKey );
 
     int getIndexByKey( string itemKey );
+
+    void printWord(int index);
     
     // Display the contents of the Hash Table to console window.
     void printTable();

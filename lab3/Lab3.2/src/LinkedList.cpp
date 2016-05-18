@@ -100,7 +100,7 @@ void LinkedList::printList()
         }
         q = p -> next;
     }
-    cout << "\n";
+    //cout << "\n";
 }
 
 // Returns the length of the list.

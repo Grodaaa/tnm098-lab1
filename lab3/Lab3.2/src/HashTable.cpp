@@ -77,6 +77,12 @@ int HashTable::getIndexByKey( string itemKey )
 }
 
 // Display the contents of the Hash Table to console window.
+void HashTable::printWord(int index)
+{
+    array[index].printList();
+}
+
+// Display the contents of the Hash Table to console window.
 void HashTable::printTable()
 {
     cout << "\nHash Table:\n";

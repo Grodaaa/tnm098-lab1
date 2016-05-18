@@ -13,6 +13,7 @@
 #include <string>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "HashTable.h"
 
 using namespace std;
@@ -32,7 +33,6 @@ int main()
     insertHash();
     convertToNumbers();
     compareText();
-
     /*Det vi vill göra:
     Läsa in filer och ta bort punkter + göra om till små bokstäver - CHECK!
     Lägga in ord från filerna i hashtabellen
@@ -47,7 +47,6 @@ void convertText()
 {
     //Read a file
     string sentence;
-
     for(int i = 1; i <= 10; i++)
     {
         string inTemp;
@@ -124,16 +123,13 @@ void insertHash()
         }        
         is.close();
     }
-
     //table.printTable();
     //table.printHistogram(); 
 }
 
 void convertToNumbers()
 {
-
     string word;
-
     for(int i = 1; i <= 10; i++)
     {
         string inTemp;
@@ -164,7 +160,6 @@ void convertToNumbers()
 			}
 			outfile << endl;
 		}
-
         is.close();
         outfile.close();
     }
@@ -185,14 +180,17 @@ void compareText()
         }
 
         string lineOne;
-
         while (getline(isOne, lineOne))
         {
-            compare(lineOne, i);
+        	if(lineOne.size() > 15)
+        	{
+        		compare(lineOne, i);
+        	}
         }
         isOne.close();
     } 
 }
+
 void compare(string line, int numOfFile)
 {
     for(int i = 1; i <= 10; i++)
@@ -211,22 +209,36 @@ void compare(string line, int numOfFile)
             }
 
             string compLine;
+            string words;
             while (getline(isComp, compLine))
             {
                 if(compLine == line)
                 {
-                    cout << "Found match in file " << numOfFile << " and " << i  << endl;
-                    cout << compLine << endl << line << endl;
-                }
+                    //cout << "Found match in file " << numOfFile << " and " << i  << endl;
+                    //cout << compLine << endl << line << endl;
 
+					string delimiter = " ";
+					size_t pos = 0;
+					string token;
+					while ((pos = line.find(delimiter)) != string::npos) 
+					{
+					    token = line.substr(0, pos);
+					    line.erase(0, pos + delimiter.length());
+					    int index = stoi(token);
+                    	table.printWord(index);
+					}
+					if(line == "\0")
+					{
+						cout << endl;
+					}
+                }
             }
         }
     }    
 }
 
 bool compareSentences(string lineOne, string lineTwo)
-{
-    
+{ 
     for(int i = 0; i < lineOne.length(); i++)
     {
         if(lineOne[i] != lineTwo[i])

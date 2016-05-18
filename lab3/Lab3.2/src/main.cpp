@@ -22,14 +22,15 @@ void insertHash();
 void convertToNumbers();
 void compareText();
 bool compareSentences(string lineOne, string lineTwo);
+void compare(string line, int numOfFile);
 
 HashTable table;
 
 int main()
 {
-    //convert();
+    convertText();
     insertHash();
-    //convertToNumbers();
+    convertToNumbers();
     compareText();
 
     /*Det vi vill göra:
@@ -74,7 +75,11 @@ void convertText()
                 {
                     outfile << sentence << endl;
                     sentence.clear();
-                }            
+                }
+                else if(c != '\'')
+                {
+                    sentence += ' ';
+                }         
             }
             else if(c == '\n')
             {
@@ -85,10 +90,6 @@ void convertText()
                 sentence += tolower(c);
             }
         }         
-        
-        //cout << c;
-        cout << sentence;
-
         is.close(); 
         outfile.close();         
     }
@@ -119,11 +120,9 @@ void insertHash()
             else
             {
                 //cout << word << " finns redan!!" << endl;
-            }
-                
+            }   
         }        
         is.close();
-        
     }
 
     //table.printTable();
@@ -173,80 +172,65 @@ void convertToNumbers()
 
 void compareText()
 {
-    for(int i = 1; i <= 9; i++)
-    {
-        for(int j = 2; j <= 10; j++)
+    for(int i = 1; i <= 10; i++)
+    {         
+        string fileOne;
+        fileOne = "num/num" + to_string(i) + ".txt";
+        ifstream isOne;
+        isOne.open(fileOne);
+
+        if(!isOne)
         {
-            if(i != j)
-            {
-                string fileOne;
-                fileOne = "num/num" + to_string(i) + ".txt";
-                ifstream isOne;
-                isOne.open(fileOne);
-
-                string fileTwo;
-                fileTwo = "num/num" + to_string(j) + ".txt";
-                ifstream isTwo;
-                isTwo.open(fileTwo);
-
-                if(!isOne)
-                {
-                    cout << "Could not open file";
-                }
-
-                if(!isTwo)
-                {
-                    cout << "Could not open file";
-                }
-
-
-                string lineOne, lineTwo;
-                while (getline(isOne, lineOne))
-                {
-                    while (getline(isTwo, lineTwo))
-                    {
-                        if(lineOne.length() == lineTwo.length())
-                        {
-                            //cout << "lika långa" << endl;
-                            if(compareSentences(lineOne, lineTwo))
-                            {
-                                cout << lineOne << endl << lineTwo << endl;
-                                cout << "HITTAD! File " << i << " and file: " << j << endl;
-                            }  
-                            
-                            // if(lineOne.compare(lineTwo))
-                            // {
-                            //     cout << lineOne << endl << lineTwo << endl;
-                            //     cout << "File " << i << " and file: " << j << endl;
-                            // }
-
-                        }   
-                    }
-                }
-
-                isOne.close();
-                isTwo.close();
-
-            } 
+            cout << "Could not open file";
         }
-    }
+
+        string lineOne;
+
+        while (getline(isOne, lineOne))
+        {
+            compare(lineOne, i);
+        }
+        isOne.close();
+    } 
+}
+void compare(string line, int numOfFile)
+{
+    for(int i = 1; i <= 10; i++)
+    {
+        if(i != numOfFile)
+        {
+            string compareFile;
+            compareFile = "num/num" + to_string(i) + ".txt";
+            //compareFile = "num/num8.txt";
+            ifstream isComp;
+            isComp.open(compareFile);
+
+            if(!isComp)
+            {
+                cout << "Could not open file";
+            }
+
+            string compLine;
+            while (getline(isComp, compLine))
+            {
+                if(compLine == line)
+                {
+                    cout << "Found match in file " << numOfFile << " and " << i  << endl;
+                    cout << compLine << endl << line << endl;
+                }
+
+            }
+        }
+    }    
 }
 
 bool compareSentences(string lineOne, string lineTwo)
 {
-    istringstream bufferOne(lineOne);
-    istringstream bufferTwo(lineTwo);
-
-    string wordOne, wordTwo;
-
-    while (bufferOne >> wordOne)
+    
+    for(int i = 0; i < lineOne.length(); i++)
     {
-        while(bufferTwo >> wordTwo)
-        {
-            //cout << "Ord1: " << wordOne << " ord2: " << wordTwo << endl;
-            if(wordOne != wordTwo)
-                return false;
-        }
+        if(lineOne[i] != lineTwo[i])
+            return false;
     }
     return true;
 }
